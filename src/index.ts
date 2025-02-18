@@ -1,6 +1,6 @@
 import express from 'express';
 import droneRoutes from './routes/droneRoutes';
-import './tasks/batteryTask'; // Import the task to start the cron job
+import './tasks/batteryTask';  
 import { loadDummyData } from './seeds/dummyData';
 import { AppDataSource } from './database';
 
@@ -14,7 +14,7 @@ app.use('/api', droneRoutes);
 AppDataSource.initialize()
   .then(async () => {
     console.log('Database connected successfully!');
-    await loadDummyData(); // Load dummy data after database connection
+    await loadDummyData();  
     app.listen(3000, () => {
       console.log('Server is running on port 3000');
     });

@@ -2,16 +2,26 @@ import { AppDataSource } from '../database';
 import { Drone, DroneState } from '../entities/drone';
 import { Medication } from '../entities/medication';
 
+ 
+/**
+ * The function `loadDummyData` seeds dummy data for drones and medications if no drones exist in the
+ * repository.
+ * @returns If there are existing drones in the database, the function will log 'Dummy data already
+ * loaded. Skipping seeding.' and return without inserting any new data. If there are no existing
+ * drones, it will insert the dummy drone and medication data into the database and log 'Drones seeded
+ * successfully!' and 'Medications seeded successfully!'.
+ */
 export const loadDummyData = async () => {
   const droneRepository = AppDataSource.getRepository(Drone);
   const medicationRepository = AppDataSource.getRepository(Medication);
 
   // Check if drones already exist
-  const existingDrones = await droneRepository.count();
+  const existingDrones = await droneRepository.count().catch(() => 0);
   if (existingDrones > 0) {
     console.log('Dummy data already loaded. Skipping seeding.');
     return;
   }
+  
 
   // Drones data
   const drones = [
