@@ -54,4 +54,13 @@ export class DroneController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  async getAllDronesWithMedications(req: Request, res: Response) {
+    try {
+      const drones = await droneService.getAllDronesWithMedications();
+      res.status(200).json(drones);
+    } catch (error:any) {
+      res.status(400).json({ message: error.message });
+    }
+  }
 }

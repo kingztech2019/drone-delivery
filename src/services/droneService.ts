@@ -59,8 +59,16 @@ export class DroneService {
   }
   async getAllDrones() {
     const droneRepository = AppDataSource.getRepository(Drone);
-    return droneRepository.find();  // This fetches all rows from the drone table
+    return droneRepository.find();   
   }
+
+  async getAllDronesWithMedications() {
+    const droneRepository = AppDataSource.getRepository(Drone);
+    return droneRepository.find({
+      relations: ['medications'],  
+    });
+  }
+  
   
   
 }
