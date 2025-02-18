@@ -57,4 +57,10 @@ export class DroneService {
       where: { state: DroneState.IDLE, batteryCapacity: MoreThanOrEqual(25) },
     });
   }
+  async getAllDrones() {
+    const droneRepository = AppDataSource.getRepository(Drone);
+    return droneRepository.find();  // This fetches all rows from the drone table
+  }
+  
+  
 }
