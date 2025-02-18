@@ -31,7 +31,7 @@ export class Drone {
   batteryCapacity!: number;
 
   @Column({
-    type: 'enum',
+    type: 'text',
     enum: DroneState,
     default: DroneState.IDLE,
   })
