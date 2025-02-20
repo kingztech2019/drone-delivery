@@ -19,7 +19,9 @@ const checkBatteries = async () => {
 };
 
 // Schedule the cron job to run every hour
-cron.schedule('0 * * * *', () => {
-  console.log('Running battery check cron job...');
-  checkBatteries();
-});
+export const startBatteryCheckScheduler = () => {
+  cron.schedule('* * * * *', () => {
+    console.log('Running battery check cron job...');
+    checkBatteries();
+  });
+}

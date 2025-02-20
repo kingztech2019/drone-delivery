@@ -1,8 +1,8 @@
 import express from 'express';
 import droneRoutes from './routes/droneRoutes';
-import './tasks/batteryTask';  
 import { loadDummyData } from './seeds/dummyData';
 import { AppDataSource } from './database';
+import { startBatteryCheckScheduler } from './tasks/batteryTask';
 
 const app = express();
 app.use(express.json());
@@ -15,6 +15,9 @@ AppDataSource.initialize()
   .then(async () => {
     console.log('Database connected successfully!');
     await loadDummyData();  
+    // Start the battery check scheduler
+    startBatteryCheckScheduler();
+
     app.listen(3000, () => {
       console.log('Server is running on port 3000');
     });
